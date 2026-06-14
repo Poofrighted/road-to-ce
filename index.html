@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinSeed — จัดการเงินให้ต้นไม้เติบโต</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">Fin<span>Seed</span></div>
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+  </div>
+
+  <div class="sidebar-section-label">ผู้ใช้ใหม่</div>
+  <button class="sidebar-item" id="sitem-intro" onclick="showPage('intro'); closeSidebar()">
+    <span class="s-icon">✨</span> แนะนำเว็บ
+  </button>
+  <button class="sidebar-item" id="sitem-first-setup" onclick="showPage('first-setup'); closeSidebar()">
+    <span class="s-icon">🧭</span> ตั้งค่าครั้งแรก
+  </button>
+
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-section-label">เมนูหลัก</div>
+  <button class="sidebar-item active" id="sitem-dashboard" onclick="showPage('dashboard'); closeSidebar()">
+    <span class="s-icon">📊</span> ภาพรวม
+  </button>
+  <button class="sidebar-item" id="sitem-transactions" onclick="showPage('transactions'); closeSidebar()">
+    <span class="s-icon">💳</span> รายการ
+  </button>
+  <button class="sidebar-item" id="sitem-chart" onclick="showPage('chart'); closeSidebar()">
+    <span class="s-icon">📈</span> กราฟ
+  </button>
+  <button class="sidebar-item" id="sitem-tree" onclick="showPage('tree'); closeSidebar()">
+    <span class="s-icon">🌱</span> ต้นไม้
+  </button>
+  <button class="sidebar-item" id="sitem-advisor" onclick="showPage('advisor'); closeSidebar()">
+    <span class="s-icon">🤖</span> ที่ปรึกษา AI
+  </button>
+
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-section-label">ตั้งค่า</div>
+  <button class="sidebar-item" id="sitem-settings" onclick="showPage('settings'); closeSidebar()">
+    <span class="s-icon">⚙️</span> ตั้งค่า
+  </button>
+</div>
+
+<nav>
+  <button class="hamburger" onclick="openSidebar()" title="เมนู">☰</button>
+  <div class="nav-logo" style="margin-left:14px">Fin<span>Seed</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('dashboard')">📊 ภาพรวม</button>
+    <button class="nav-tab" onclick="showPage('transactions')">💳 รายการ</button>
+    <button class="nav-tab" onclick="showPage('chart')">📈 กราฟ</button>
+    <button class="nav-tab" onclick="showPage('tree')">🌱 ต้นไม้</button>
+    <button class="nav-tab" onclick="showPage('advisor')">🤖 ปรึกษา</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ===== INTRO ===== -->
+  <div class="page" id="page-intro">
+    <div class="card hero-panel">
+      <div class="hero-kicker">ยินดีต้อนรับสู่ FinSeed</div>
+      <div class="hero-title">จัดเงินให้งอกงามแบบเห็นภาพ</div>
+      <div class="hero-desc">
+        FinSeed ช่วยบันทึกรายรับ รายจ่าย วางแผนค่าใช้จ่ายล่วงหน้า และเปลี่ยนการออมให้กลายเป็นต้นไม้ที่ค่อยๆ เติบโตตามเงินในกระปุกของคุณ
+      </div>
+      <div class="setup-actions">
+        <button class="btn btn-primary" onclick="showPage('first-setup')">เริ่มตั้งค่าครั้งแรก</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">ฟีเจอร์หลัก</div>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">ภาพรวมการเงิน</div>
+          <div class="feature-text">ดูยอดคงเหลือ รายรับ รายจ่าย แผนจ่าย และเงินที่ใช้ได้ต่อวันในหน้าเดียว</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💳</div>
+          <div class="feature-title">บันทึกรายการ</div>
+          <div class="feature-text">เพิ่มรายรับ รายจ่าย และรายจ่ายที่วางแผนไว้ พร้อมวันครบกำหนดและเวลาตัดอัตโนมัติ</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">กราฟรายเดือน</div>
+          <div class="feature-text">เปรียบเทียบรายรับกับรายจ่ายแต่ละเดือน เพื่อเห็นนิสัยการใช้เงินชัดขึ้น</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌱</div>
+          <div class="feature-title">ต้นไม้นักออม</div>
+          <div class="feature-text">นำเงินเหลือไปออมในกระปุก ต้นไม้จะเติบโตเมื่อยอดออมถึงเกณฑ์ที่ตั้งไว้</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">วิธีใช้งานคร่าวๆ</div>
+      </div>
+      <div class="steps-list">
+        <div class="step-item">
+          <strong>ตั้งค่าพื้นฐาน</strong>
+          <div class="feature-text">ใส่ชื่อ ตั้งยอดแจ้งเตือนขั้นต่ำ และกำหนดเกณฑ์อัพเลเวลต้นไม้ในหน้า “ตั้งค่าครั้งแรก”</div>
+        </div>
+        <div class="step-item">
+          <strong>บันทึกรายรับก่อน</strong>
+          <div class="feature-text">เพิ่มเงินเดือน ค่าจ้าง หรือรายรับอื่นๆ เพื่อให้ระบบคำนวณยอดคงเหลือได้ถูกต้อง</div>
+        </div>
+        <div class="step-item">
+          <strong>ใส่รายจ่ายและแผนจ่าย</strong>
+          <div class="feature-text">รายจ่ายจริงใช้ติดตามเงินที่ออกไปแล้ว ส่วนรายจ่ายที่วางแผนไว้ช่วยกันลืมค่าใช้จ่ายในอนาคต</div>
+        </div>
+        <div class="step-item">
+          <strong>ออมเงินในหน้าต้นไม้</strong>
+          <div class="feature-text">เมื่อมีเงินเหลือ ให้ย้ายเข้ากระปุกเพื่อเพิ่มยอดออมและทำให้ต้นไม้เติบโต</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FIRST SETUP ===== -->
+  <div class="page" id="page-first-setup">
+    <div class="section-header" style="margin-bottom:20px">
+      <div>
+        <div class="section-title">🧭 ตั้งค่าครั้งแรก</div>
+        <div class="setting-help">ตั้งค่าพื้นฐานให้ FinSeed รู้จักคุณและคำนวณการเงินตามเป้าหมายของคุณ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">👤 โปรไฟล์ผู้ใช้</div>
+      <div class="setting-row">
+        <div class="setting-label">
+          ชื่อของคุณ
+          <small>ใช้แสดงในข้อความต้อนรับและทำให้แอปดูเป็นพื้นที่ส่วนตัวมากขึ้น</small>
+        </div>
+        <input type="text" id="setup-user-name-input" placeholder="เช่น นัท" style="width:180px">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💰 ยอดแจ้งเตือนขั้นต่ำ</div>
+      <div class="setting-row">
+        <div class="setting-label">
+          เงินคงเหลือขั้นต่ำ
+          <small>ถ้ายอดเงินปัจจุบันต่ำกว่าค่านี้ หน้าแรกจะแจ้งเตือนให้ระวังค่าใช้จ่าย</small>
+        </div>
+        <input type="number" id="setup-min-balance-input" placeholder="เช่น 1000" style="width:150px" min="0">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌱 เกณฑ์เติบโตของต้นไม้</div>
+      <div class="setting-help" style="margin-bottom:12px">
+        กำหนดยอดเงินในกระปุกที่ต้องถึงเพื่อปลดล็อกแต่ละระดับ ยอดควรเรียงจากน้อยไปมาก
+      </div>
+      <div id="setup-threshold-fields"></div>
+      <div class="setup-actions">
+        <button class="btn btn-green" onclick="saveInitialSetup()">บันทึกและไปหน้าแรก</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DASHBOARD ===== -->
+  <div class="page active" id="page-dashboard">
+    <div id="alert-zone"></div>
+
+    <div class="card" id="welcome-card">
+      <div class="card-title">สวัสดี <span id="welcome-name">นักออม</span></div>
+      <div class="feature-text">วันนี้มาดูภาพรวมเงินของคุณ แล้วค่อยๆ ทำให้ FinSeed เติบโตไปพร้อมเป้าหมายการออมกัน</div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">ยอดเงินปัจจุบัน</div>
+        <div class="stat-value stat-green" id="db-balance">฿0</div>
+        <div class="stat-label">ในบัญชี</div>
+      </div>
+      <div class="card">
+        <div class="card-title">รายจ่ายที่วางแผนไว้</div>
+        <div class="stat-value stat-red" id="db-planned">฿0</div>
+        <div class="stat-label">เดือนนี้</div>
+      </div>
+      <div class="card">
+        <div class="card-title">เงินใช้ต่อวัน</div>
+        <div class="stat-value stat-blue" id="db-daily">฿0</div>
+        <div class="stat-label">วันที่เหลือในเดือน: <span id="db-days-left">—</span> วัน</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">รายรับเดือนนี้</div>
+        <div class="stat-value stat-green" id="db-income">฿0</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="db-income-bar" style="background:var(--green); width:0%"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">รายจ่ายจริงเดือนนี้</div>
+        <div class="stat-value stat-red" id="db-expense">฿0</div>
+        <div class="progress-track">
+          <div class="progress-fill" id="db-expense-bar" style="background:var(--red); width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">รายการล่าสุด</div>
+      </div>
+      <div id="recent-list">
+        <div class="empty"><span class="empty-icon">📭</span>ยังไม่มีรายการ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TRANSACTIONS ===== -->
+  <div class="page" id="page-transactions">
+
+    <!-- Add Income -->
+    <div class="card">
+      <div class="card-title">➕ บันทึกรายรับ</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>รายละเอียด</label>
+          <input type="text" id="inc-name" placeholder="เช่น เงินเดือน, ค่าจ้าง">
+        </div>
+        <div class="form-group" style="max-width:160px">
+          <label>จำนวนเงิน (฿)</label>
+          <input type="number" id="inc-amount" placeholder="0" min="0">
+        </div>
+        <div class="form-group" style="max-width:150px">
+          <label>ประเภทเงิน</label>
+          <select id="inc-frequency">
+            <option value="daily">เงินรายวัน</option>
+            <option value="monthly">เงินรายเดือน</option>
+          </select>
+        </div>
+        <div class="form-group" style="max-width:160px">
+          <label>วันที่</label>
+          <input type="date" id="inc-date">
+        </div>
+        <button class="btn btn-green" onclick="addIncome()" style="margin-bottom:0; align-self:flex-end">บันทึก</button>
+      </div>
+    </div>
+
+    <!-- Add Planned Expense -->
+    <div class="card">
+      <div class="card-title">📋 วางแผนรายจ่ายล่วงหน้า</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>รายละเอียด</label>
+          <input type="text" id="plan-name" placeholder="เช่น ค่าเช่า, ค่าอาหาร">
+        </div>
+        <div class="form-group" style="max-width:140px">
+          <label>จำนวน (฿)</label>
+          <input type="number" id="plan-amount" placeholder="0" min="0">
+        </div>
+        <div class="form-group" style="max-width:130px">
+          <label>หมวดหมู่</label>
+          <select id="plan-cat">
+            <option>ที่พัก</option>
+            <option>อาหาร</option>
+            <option>เดินทาง</option>
+            <option>การศึกษา</option>
+            <option>สุขภาพ</option>
+            <option>บันเทิง</option>
+            <option>อื่นๆ</option>
+          </select>
+        </div>
+        <div class="form-group" style="max-width:150px">
+          <label>วันครบกำหนด</label>
+          <input type="date" id="plan-due">
+        </div>
+        <div class="form-group" style="max-width:120px">
+          <label>เวลา (ภายใน)</label>
+          <input type="time" id="plan-time" value="23:59">
+        </div>
+        <button class="btn btn-primary" onclick="addPlanned()" style="align-self:flex-end">เพิ่ม</button>
+      </div>
+      <div id="planned-list">
+        <div class="empty"><span class="empty-icon">📋</span>ยังไม่มีรายจ่ายที่วางแผน</div>
+      </div>
+    </div>
+
+    <!-- Add Actual Expense -->
+    <div class="card">
+      <div class="card-title">💸 บันทึกรายจ่ายจริง</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>รายละเอียด</label>
+          <input type="text" id="exp-name" placeholder="เช่น กาแฟ, ค่ารถ">
+        </div>
+        <div class="form-group" style="max-width:160px">
+          <label>จำนวน (฿)</label>
+          <input type="number" id="exp-amount" placeholder="0" min="0">
+        </div>
+        <div class="form-group" style="max-width:160px">
+          <label>วันที่</label>
+          <input type="date" id="exp-date">
+        </div>
+        <button class="btn btn-red" onclick="addExpense()" style="align-self:flex-end; padding:10px 20px; font-size:14px">บันทึก</button>
+      </div>
+    </div>
+
+    <!-- History -->
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">ประวัติรายการ</div>
+        <button class="btn btn-red btn-sm" onclick="clearAll()">ล้างทั้งหมด</button>
+      </div>
+      <div id="tx-list">
+        <div class="empty"><span class="empty-icon">📭</span>ยังไม่มีรายการ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CHART ===== -->
+  <div class="page" id="page-chart">
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">รายรับ-รายจ่ายรายเดือน</div>
+      </div>
+      <div id="month-chips" class="month-row"></div>
+      <canvas id="bar-chart" height="300"></canvas>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">รายรับเดือนนี้</div>
+        <div class="stat-value stat-green" id="chart-income">฿0</div>
+      </div>
+      <div class="card">
+        <div class="card-title">รายจ่ายเดือนนี้</div>
+        <div class="stat-value stat-red" id="chart-expense">฿0</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">คงเหลือสุทธิเดือนนี้</div>
+      <div class="stat-value" id="chart-net" style="font-size:32px">฿0</div>
+    </div>
+  </div>
+
+  <!-- ===== TREE ===== -->
+  <div class="page" id="page-tree">
+    <div class="card">
+      <div class="tree-stage">
+        <div class="card-title">ต้นไม้แห่งการออมของคุณ</div>
+        <span class="tree-visual" id="tree-emoji">🌰</span>
+        <div class="tree-name" id="tree-name">เมล็ด</div>
+        <div class="tree-desc" id="tree-desc">จุดเริ่มต้นของทุกอย่าง...</div>
+
+        <div class="stages-row" id="stages-row"></div>
+
+        <div style="margin-top: 24px">
+          <div class="progress-track" style="height:12px; max-width:400px; margin:0 auto 8px">
+            <div class="progress-fill" id="tree-progress" style="background: linear-gradient(90deg, var(--green), var(--gold)); width:0%"></div>
+          </div>
+          <div style="font-size:13px; color:var(--text-muted)">
+            💰 <span id="tree-piggy-display">฿0</span> / <span id="tree-next-amount">฿500</span> สู่ระดับถัดไป
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">💧 ออมเงินเข้ากระปุก</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px">
+          ออมได้อีก: <strong style="color:var(--green)" id="saveable-amount">฿0</strong>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>จำนวน (฿)</label>
+            <input type="number" id="save-amount" placeholder="0" min="1">
+          </div>
+          <button class="btn btn-gold" onclick="doSave()" style="align-self:flex-end">💧 ออม</button>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted)">* 1 บาท = 1 หยดน้ำ</div>
+      </div>
+      <div class="card">
+        <div class="card-title">📤 ถอนเงินออกจากกระปุก</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:12px">
+          ในกระปุก: <strong style="color:var(--gold)" id="piggy-total">฿0</strong>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>จำนวน (฿)</label>
+            <input type="number" id="withdraw-amount" placeholder="0" min="1">
+          </div>
+          <button class="btn btn-red" onclick="doWithdraw()" style="align-self:flex-end; padding:10px 16px; font-size:14px">📤 ถอน</button>
+        </div>
+        <div style="font-size:12px; color:var(--text-muted)">* ถอนแล้วต้นไม้อาจหดลง</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-header">
+        <div class="section-title">ประวัติกระปุก</div>
+        <div style="display:flex; align-items:center; gap:12px">
+          <div class="stat-value stat-gold" style="font-size:20px" id="piggy-total-2">฿0</div>
+          <button class="btn btn-red btn-sm" onclick="clearSavings()">ล้างทั้งหมด</button>
+        </div>
+      </div>
+      <div id="save-log">
+        <div class="empty"><span class="empty-icon">💰</span>ยังไม่มีการออม</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AI ADVISOR ===== -->
+  <div class="page" id="page-advisor">
+    <div class="section-header" style="margin-bottom:20px">
+      <div>
+        <div class="section-title">🤖 ที่ปรึกษา AI การเงิน</div>
+        <div class="setting-help">ถามปัญหาการเงินส่วนตัวจากข้อมูลใน FinSeed ได้เลย ระบบนี้วิเคราะห์ในเครื่องจากรายรับ รายจ่าย แผนจ่าย และเงินออมของคุณ</div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">ยอดคงเหลือ</div>
+        <div class="stat-value stat-green" id="ai-balance">฿0</div>
+        <div class="stat-label">หลังหักเงินออม</div>
+      </div>
+      <div class="card">
+        <div class="card-title">ใช้ได้ต่อวัน</div>
+        <div class="stat-value stat-blue" id="ai-daily">฿0</div>
+        <div class="stat-label">หลังกันรายจ่ายที่วางแผนไว้</div>
+      </div>
+      <div class="card">
+        <div class="card-title">เงินออม</div>
+        <div class="stat-value stat-gold" id="ai-saving">฿0</div>
+        <div class="stat-label">ในกระปุกต้นไม้</div>
+      </div>
+    </div>
+
+    <div class="card advisor-card">
+      <div class="card-title">ถามที่ปรึกษา</div>
+      <div class="quick-questions">
+        <button class="month-chip" onclick="askQuickAdvisor('เงินเดือนนี้พอใช้ไหม')">เงินพอใช้ไหม</button>
+        <button class="month-chip" onclick="askQuickAdvisor('เดือนนี้ควรประหยัดตรงไหน')">ควรประหยัดตรงไหน</button>
+        <button class="month-chip" onclick="askQuickAdvisor('ควรออมเงินเท่าไหร่')">ควรออมเท่าไหร่</button>
+        <button class="month-chip" onclick="askQuickAdvisor('รายจ่ายส่วนไหนเสี่ยง')">รายจ่ายเสี่ยงไหม</button>
+        <button class="month-chip" onclick="askQuickAdvisor('ช่วยวางแผนการเงินเดือนนี้')">วางแผนเดือนนี้</button>
+      </div>
+      <div id="advisor-chat" class="advisor-chat"></div>
+      <div class="advisor-input-row">
+        <textarea id="advisor-input" rows="3" placeholder="พิมพ์ปัญหาการเงิน เช่น เดือนนี้เงินเหลือ 3,000 ควรใช้ยังไงดี"></textarea>
+        <button class="btn btn-primary" onclick="askAdvisor()">ถาม</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SETTINGS ===== -->
+  <div class="page" id="page-settings">
+    <div class="section-header" style="margin-bottom:20px">
+      <div class="section-title">⚙️ ตั้งค่า</div>
+    </div>
+
+    <!-- User Profile -->
+    <div class="card">
+      <div class="card-title">👤 โปรไฟล์ผู้ใช้</div>
+      <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px">ชื่อจะใช้สำหรับข้อความต้อนรับและช่วยให้แอปเป็นพื้นที่การเงินส่วนตัวของคุณ</div>
+      <div class="setting-row">
+        <div class="setting-label">
+          ชื่อของคุณ
+          <small>แก้ไขได้ทุกเมื่อ ข้อมูลจะถูกเก็บไว้ในเครื่องนี้</small>
+        </div>
+        <input type="text" id="user-name-input" placeholder="เช่น นัท" style="width:160px">
+        <button class="btn btn-primary btn-sm" onclick="saveUserProfile()">บันทึก</button>
+      </div>
+    </div>
+
+    <!-- Min Balance -->
+    <div class="card">
+      <div class="card-title">💰 ตั้งค่ายอดขั้นต่ำ</div>
+      <div style="font-size:13px; color:var(--text-muted); margin-bottom:14px">ระบบจะแจ้งเตือนเมื่อยอดเงินคงเหลือต่ำกว่าที่กำหนด</div>
+      <div class="setting-row">
+        <div class="setting-label">
+          ยอดแจ้งเตือนขั้นต่ำ
+          <small>จะแจ้งเตือนเมื่อยอดเงินต่ำกว่านี้</small>
+        </div>
+        <input type="number" id="min-balance-input" placeholder="เช่น 1000" style="width:140px" min="0">
+        <button class="btn btn-primary btn-sm" onclick="saveMinBalance()">บันทึก</button>
+      </div>
+    </div>
+
+    <!-- Tree Thresholds -->
+    <div class="card">
+      <div class="section-header">
+        <div class="card-title" style="margin-bottom:0">🌱 ตั้งค่าเกณฑ์อัพเลเวล ระบบต้นไม้</div>
+        <button class="btn btn-primary btn-sm" onclick="saveThresholds()">บันทึก</button>
+      </div>
+      <div style="font-size:13px; color:var(--text-muted); margin:10px 0 14px">กำหนดยอดเงินในกระปุกที่ต้องการเพื่ออัพระดับต้นไม้</div>
+      <div id="threshold-fields"></div>
+    </div>
+  </div>
+
+</main>
+
+<div id="modal-overlay" class="modal-overlay" style="display:none" onclick="closeConfirm(event)">
+  <div class="modal-box">
+    <div class="modal-icon">🗑️</div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-desc" id="modal-desc"></div>
+    <div class="modal-actions">
+      <button class="btn btn-red" style="padding:10px 24px; font-size:14px" onclick="confirmYes()">ล้างเลย</button>
+      <button class="btn btn-primary" style="padding:10px 24px; font-size:14px" onclick="closeConfirm()">ยกเลิก</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
